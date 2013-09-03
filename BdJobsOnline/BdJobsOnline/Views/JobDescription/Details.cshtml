@@ -1,0 +1,100 @@
+﻿@model BdJobsOnline.BdJobsDatabase.JobDescription
+@{
+    ViewBag.Title = "bdjobs.com: Largest Job Site in Bangladesh";
+}
+
+
+<fieldset>
+    <legend>Job Description</legend>
+
+
+    <div style="float: right">
+
+        @{ if (Roles.IsUserInRole("Admin"))
+           {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.JobId }, new { @class = "edit-icon" })
+
+
+               using (Html.BeginForm("Delete", "JobDescription", new { Id = Model.JobId }, FormMethod.Post))
+               {
+            <input type="submit" value="" class="delete-icon" onclick=" return confirm('Are you sure you wish to delete this Job') " />
+               }
+
+           }    
+   
+        }
+
+    </div>
+
+    <div class="display-label"><b>Job Title</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label"><b>Company Name</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CompanyName)
+    </div>
+
+    <div class="display-label"><b>Education</b></div>
+    <div class="display-field">
+        @Html.Raw(Model.EducationalQualification)
+    </div>
+    
+    <div class="display-label"><b>No of Vacancy</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Vacancy)
+    </div>
+
+    <div class="display-label"><b>Job Type</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Type)
+    </div>
+
+    <div class="display-label"><b>Job Level</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.JobLevel)
+    </div>
+
+    <div class="display-label"><b>Additional Requirement</b></div>
+    <div class="display-field">
+        @Html.Raw(Model.AdditionalRequirement)
+    </div>
+
+    <div class="display-label"><b>Job Location</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Location)
+    </div>
+
+    <div class="display-label"><b>Job Category</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.JobCategory.CategoryName)
+    </div>
+
+    <div class="display-label"><b>Age Range</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Age)
+    </div>
+
+
+    <div class="display-label"><b>Experience</b></div>
+    <div class="display-field">
+        @Html.Raw(Model.Experience)
+    </div>
+
+    <div class="display-label"><b>Last Date</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastDate)
+
+    </div>
+    
+  
+
+</fieldset>
+
+
+
+
+
+
+

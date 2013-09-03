@@ -1,0 +1,9 @@
+﻿@model IEnumerable<BdJobsOnline.BdJobsDatabase.JobCategory>
+           
+<select id="jobCategoryFilter">
+    <option value="all">All Categories</option>
+    @foreach (var category in Model)
+    {
+        <option value="@category.JobCategoryId">@category.CategoryName</option>
+    }
+</select>

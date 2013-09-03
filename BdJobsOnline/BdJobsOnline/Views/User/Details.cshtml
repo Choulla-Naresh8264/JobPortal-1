@@ -1,0 +1,41 @@
+﻿@model BdJobsOnline.BdJobsDatabase.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<fieldset>
+    <legend>User Details</legend>
+
+    <div class="display-label"><b>User Name</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    
+
+    <div class="display-label"><b>Role</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Role.RoleName)
+    </div>
+
+    <div class="display-label"><b>Firs tName</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <div class="display-label"><b>Last Name</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+
+    <div class="display-label"><b>Email</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.UserId }) |
+    @Html.ActionLink("Back User List", "Index")
+</p>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<BdJobsOnline.BdJobsDatabase.JobDescription>
+@{
+    ViewBag.Title = "bdjobs.com: Largest Job Site in Bangladesh";
+}
+
+@if (Roles.IsUserInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New Job", "Create")
+    </p>
+
+}
+
+<script type="text/javascript" src="~/DataTables-1.9.4/media/js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
+
+
+<link href="@Url.Content("~/DataTables-1.9.4/media/css/demo_table.css")" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+    #myDataTable_filter
+    {
+        display: none;
+    }
+
+    .jobCategory-filter-container
+    {
+        float: right;
+    }
+</style>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var jobDescriptionDataTable = $('#myDataTable').dataTable({
+            "bServerSide": true,
+            "sAjaxSource": "JobDescription/AjaxHandler",
+            "bProcessing": true,
+            "sPaginationType": "full_numbers",
+            "aoColumns": [
+
+                            { "sName": "Company" },
+                            { "sName": "Title" },
+                            { "sName": "EducationalQualification" },
+                            { "sName": "LastDate" }
+            ]
+        });
+
+        $("#jobCategoryFilter").change(function () {
+            var categoryId = $(this).val();
+            jobDescriptionDataTable.fnFilter(categoryId);
+        });
+        
+       
+    });
+</script>
+
+
+
+<div id="container">
+    <div id="demo">
+        <div class="jobCategory-filter-container">
+            @Html.Action("CategoryFilter", "JobDescription")
+        </div>
+        <table id="myDataTable" class="display">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Job Title</th>
+                    <th>Education</th>
+                    <th>Last Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+

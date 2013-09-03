@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BdJobsOnline.BdJobsDatabase.User>
+@{
+    ViewBag.Title = "bdjobs.com: Largest Job Site in Bangladesh";
+}
+
+<h2>User Information</h2>
+
+<table width="100%">
+    <tr>
+        <th>User Name
+        </th>
+
+        <th>Role
+        </th>
+        <th>First Name
+        </th>
+        <th>Last Name
+        </th>
+        <th>Email
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+               
+                 @Html.ActionLink(item.UserName, "Details", new { id = item.UserId }, new { style = "text-decoration:none" })
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.RoleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserId },new { @class="edit-icon" } )
+            
+                @using (Html.BeginForm("Delete", "User", new { Id = item.UserId }, FormMethod.Post))
+                    {
+                    <input type="submit" value="" class="delete-icon" onclick = "return confirm('Are you sure you wish to delete this User')"/> 
+                    }
+            </td>
+        </tr>
+    }
+
+</table>

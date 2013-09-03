@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BdJobsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BdJobsEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="JobCategories" EntityType="BdJobsModel.JobCategory" />
+    <EntitySet Name="JobDescriptions" EntityType="BdJobsModel.JobDescription" />
+    <EntitySet Name="Roles" EntityType="BdJobsModel.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="BdJobsModel.sysdiagram" />
+    <EntitySet Name="Users" EntityType="BdJobsModel.User" />
+    <AssociationSet Name="FK_JobDescription_JobCategory" Association="BdJobsModel.FK_JobDescription_JobCategory">
+      <End Role="JobCategory" EntitySet="JobCategories" />
+      <End Role="JobDescription" EntitySet="JobDescriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobDescription_User" Association="BdJobsModel.FK_JobDescription_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="JobDescription" EntitySet="JobDescriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Company" Association="BdJobsModel.FK_User_Company">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="JobCategory">
+    <Key>
+      <PropertyRef Name="JobCategoryId" />
+    </Key>
+    <Property Name="JobCategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="JobDescriptions" Relationship="BdJobsModel.FK_JobDescription_JobCategory" FromRole="JobCategory" ToRole="JobDescription" />
+  </EntityType>
+  <EntityType Name="JobDescription">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="Vacancy" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="JobLevel" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Location" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="JobCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Age" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="EducationalQualification" Type="String" Nullable="false" MaxLength="2000" Unicode="false" FixedLength="false" />
+    <Property Name="AdditionalRequirement" Type="String" Nullable="false" MaxLength="2000" Unicode="false" FixedLength="false" />
+    <Property Name="Experience" Type="String" Nullable="false" MaxLength="2000" Unicode="false" FixedLength="false" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="LastDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="JobCategory" Relationship="BdJobsModel.FK_JobDescription_JobCategory" FromRole="JobDescription" ToRole="JobCategory" />
+    <NavigationProperty Name="User" Relationship="BdJobsModel.FK_JobDescription_User" FromRole="JobDescription" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Users" Relationship="BdJobsModel.FK_User_Company" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="JobDescriptions" Relationship="BdJobsModel.FK_JobDescription_User" FromRole="User" ToRole="JobDescription" />
+    <NavigationProperty Name="Role" Relationship="BdJobsModel.FK_User_Company" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_JobDescription_JobCategory">
+    <End Role="JobCategory" Type="BdJobsModel.JobCategory" Multiplicity="1" />
+    <End Role="JobDescription" Type="BdJobsModel.JobDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobCategory">
+        <PropertyRef Name="JobCategoryId" />
+      </Principal>
+      <Dependent Role="JobDescription">
+        <PropertyRef Name="JobCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobDescription_User">
+    <End Role="User" Type="BdJobsModel.User" Multiplicity="1" />
+    <End Role="JobDescription" Type="BdJobsModel.JobDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="JobDescription">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Company">
+    <End Role="Role" Type="BdJobsModel.Role" Multiplicity="1" />
+    <End Role="User" Type="BdJobsModel.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

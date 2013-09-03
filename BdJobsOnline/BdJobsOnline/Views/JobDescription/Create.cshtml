@@ -1,0 +1,128 @@
+﻿@model BdJobsOnline.BdJobsDatabase.JobDescription
+@{
+    ViewBag.Title = "bdjobs.com: Largest Job Site in Bangladesh";
+    
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Job Description</legend>
+
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CompanyName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CompanyName)
+            @Html.ValidationMessageFor(model => model.CompanyName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EducationalQualification)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EducationalQualification)
+            @Html.ValidationMessageFor(model => model.EducationalQualification)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Vacancy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Vacancy)
+            @Html.ValidationMessageFor(model => model.Vacancy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Type)
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JobLevel)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JobLevel)
+            @Html.ValidationMessageFor(model => model.JobLevel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdditionalRequirement)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdditionalRequirement)
+            @Html.ValidationMessageFor(model => model.AdditionalRequirement)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Location)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Location)
+            @Html.ValidationMessageFor(model => model.Location)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JobCategoryId, "Job Category")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("JobCategoryId", "Select Category")
+            @Html.ValidationMessageFor(model => model.JobCategoryId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Age)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Age)
+            @Html.ValidationMessageFor(model => model.Age)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Experience)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Experience)
+            @Html.ValidationMessageFor(model => model.Experience)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastDate)
+            @Html.ValidationMessageFor(model => model.LastDate)
+        </div>
+      
+
+        <div class="editor-field">
+            <input type="hidden" name="UserId" value="@ViewBag.UserId"/>
+        </div>
+
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+
+
+

@@ -1,0 +1,19 @@
+﻿@model BdJobsOnline.BdJobsDatabase.Role
+
+@{
+    ViewBag.Title = "bdjobs.com: Largest Job Site in Bangladesh";
+}
+
+
+<fieldset>
+    <legend>User Role Details</legend>
+
+    <div class="display-label"><b>Role Name</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RoleName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RoleId }) |
+    @Html.ActionLink("Back to Role List", "Index")
+</p>

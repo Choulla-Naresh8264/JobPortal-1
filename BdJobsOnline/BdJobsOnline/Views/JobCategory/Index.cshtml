@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BdJobsOnline.BdJobsDatabase.JobCategory>
+@{
+    ViewBag.Title = "bdjobs.com: Largest Job Site in Bangladesh";
+}
+
+<h2>Job Category</h2>
+
+<p>
+    @Html.ActionLink("Create New Job Category", "Create")
+</p>
+<table width="70%">
+    <tr>
+        <th>Category Name
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                @Html.ActionLink(item.CategoryName, "Details", new { id = item.JobCategoryId }, new { style = "text-decoration:none" })
+            </td>
+            <td>
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.JobCategoryId }, new { @class = "edit-icon" })
+
+                @using (Html.BeginForm("Delete", "JobCategory", new { Id = item.JobCategoryId }, FormMethod.Post))
+                {
+                    <input type="submit" value="" class="delete-icon" onclick="return confirm('Are you sure you wish to delete this Job Category')" /> 
+                }
+            </td>
+        </tr>
+    }
+
+</table>
